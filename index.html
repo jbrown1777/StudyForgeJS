@@ -3160,7 +3160,7 @@
 
             deckList.innerHTML = decks.map(deck => {
                 const isActive = deck.id === currentDeckId;
-                const cardCount = 1;//deck.cards.length;
+                const cardCount = deck.cards.length;
                 const accuracy = deck.stats.accuracy.toFixed(0);
                 const lastModified = new Date(deck.lastModified).toLocaleDateString();
 
