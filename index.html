@@ -3833,6 +3833,8 @@
                 back: card.answer
             }));
 
+            DeckManager.saveDeck(deck);
+
             // Show study UI
             flashcardModeContainer.classList.remove("hidden");
             modeSelector.style.display = "flex";
