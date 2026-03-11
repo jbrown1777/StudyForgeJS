@@ -442,6 +442,8 @@ function readDOCX(file) {
             parseFlashcards(text);
         });
     };
+
+    reader.readAsArrayBuffer(file);
 }
 
 function readImage(file) {
