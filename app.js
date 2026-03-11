@@ -667,6 +667,10 @@ function closeDeckLibrary() {
             editModeBtn.click();
         }
     }
+
+    if (uploadSection.style.display !== "none") {
+        hideFlashcardMode();
+    }
 }
 
 // Upload a new deck from the library
