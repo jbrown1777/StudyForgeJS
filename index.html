@@ -3670,6 +3670,7 @@
                 // Prompt to save the deck to library
                 const fileNameText = fileName?.textContent || 'Flashcards';
                 promptSaveDeck(fileNameText, cardsData);
+                fileName.textContent = fileNameText;
                 initializeApp();
             }
         }
@@ -3819,8 +3820,6 @@
 
         function startDeck() {
             if (!deck || deck.length === 0) return alert("Add at least one card first");
-
-            console.log(fileNameText);
 
             uploadSection.style.display = "none";
             createDeck.style.display = "none";
