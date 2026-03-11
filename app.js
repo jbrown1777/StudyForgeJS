@@ -405,7 +405,7 @@ function onFileUploaded(fileName, cardsArray) {
 }
 
 function handleUploadedFile(file) {
-    const extension = file.name.split('.').pop().toLowerCase();
+    const extension = file.split('.').pop().toLowerCase();
 
     if (extension === "txt") {
         readTXT(file);
