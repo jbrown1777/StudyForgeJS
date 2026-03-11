@@ -1,4 +1,4 @@
-console.log("Version: 1.8");
+console.log("Version: 1.9");
 
 // ============================================================================
 // DATA STORAGE AND MANAGEMENT
@@ -672,6 +672,7 @@ function closeDeckLibrary() {
 
     if (uploadSection.style.display !== "none") {
         hideFlashcardMode();
+        statsSection.style.display = "none";
     }
 }
 
