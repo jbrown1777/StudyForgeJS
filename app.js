@@ -723,7 +723,6 @@ function renderDeckLibrary() {
         emptyMessage.style.display = 'block';
         return;
     }
-    console.log(decks);
 
     emptyMessage.style.display = 'none';
 
@@ -1321,6 +1320,7 @@ function backToFileSelect() {
 
     if (createDeck) createDeck.style.display = "none";
     if (flashcardModeContainer) flashcardModeContainer.classList.add("hidden");
+    if (flashcardModeContainer) flashcardModeContainer.style.display = "none";
     if (modeSelector) modeSelector.style.display = "none";
     if (statsSection) statsSection.style.display = "none";
     if (testContainer) testContainer.style.display = "none";
@@ -2564,9 +2564,9 @@ function togglePreview() {
     }
 }
 
-// 
+// ======================================
 // DARK MODE
-// 
+// ======================================
 const DARK_KEY = 'studyforgejs_dark_mode';
 
 function applyDarkMode(enabled) {
