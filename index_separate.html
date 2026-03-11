@@ -1,0 +1,475 @@
+<!-- Author: Joshua Brown -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudyForgeJS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=JetBrains+Mono:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <!-- Favicon & App Icons -->
+    <link rel="icon" type="image/x-icon" href="studyforgejs-icons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="studyforgejs-icons/icon_32.png">
+    <link rel="icon" type="image/png" sizes="128x128" href="studyforgejs-icons/icon_128.png">
+    <link rel="icon" type="image/png" sizes="256x256" href="studyforgejs-icons/icon_256.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="studyforgejs-icons/icon_256.png">
+    <!-- <link rel="manifest" href="site.webmanifest"> -->
+    <meta name="theme-color" content="#0a4fd6">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://unpkg.com/mammoth/mammoth.browser.min.js"></script>
+</head>
+
+<body>
+    <div id="heading_banner">
+        <div class="brand-name">
+            <span class="brand-study">STUDY</span><span class="brand-forge">FORGE</span><span class="brand-js">JS</span>
+        </div>
+        <img src="studyforgejs-icons/icon_128.png" class="logo" alt="studyforgejs" width="70" height="70" />
+    </div>
+
+    <!-- Onboarding Overlay -->
+    <div id="onboarding-overlay" class="onboarding-overlay hidden" aria-hidden="true" role="dialog" aria-modal="true"
+        aria-labelledby="onboarding-title">
+        <div class="onboarding-backdrop" tabindex="-1"></div>
+
+        <div class="onboarding-modal" role="document">
+            <div class="onboarding-header">
+                <div id="onboarding-title" class="onboarding-title">
+                    <img id="onboarding-logo" src="studyforgejs-icons/icon_128.png" alt="" width="28" height="28"
+                        style="vertical-align:middle; margin-right:10px;" />
+                    <span class="brand-study">Study</span><span class="brand-forge">Forge</span><span
+                        class="brand-js">JS</span> — Welcome!
+                </div>
+                <button id="onboarding-close" class="onb-close" aria-label="Close">✕</button>
+            </div>
+
+            <div class="onboarding-body">
+                <!-- Step 1 -->
+                <section class="onb-step" data-step="1">
+                    <h3>What is <span class="brand-study">Study</span><span class="brand-forge">Forge</span><span
+                            class="brand-js">JS</span>?</h3>
+                    <p>StudyForgeJS is a browser-based study app that lets you upload, create, and study custom flashcard decks entirely in the browser — without the need of an account or internet.</p><br>
+                    <p>It offers three study modes: <strong>Flashcards</strong> for passive review, <strong>Learn</strong> for typed-answer practice with instant feedback, and <strong>Test</strong> for auto-graded multiple choice.</p><br>
+                    <p>Your progress is tracked locally, including daily accuracy, study streaks, and a live accuracy graph that grows with your streak.</p><br>
+                    <p>Your study sets are stored locally, giving you the ability to switch between flashcard decks and upload new ones from your device.</p>
+                </section>
+
+                <!-- Step 2 -->
+                <section class="onb-step" data-step="2">
+                    <h3>How to use <span class="brand-study">Study</span><span class="brand-forge">Forge</span><span
+                            class="brand-js">JS</span></h3>
+                    <p>Create or upload flashcards, <strong>learn</strong> by typing answers, and <strong>test</strong>
+                        yourself with auto-graded quizzes.</p>
+                    <ul class="onb-bullets">
+                        <li>🗂️ Upload a .txt flashcard deck (Q/A on alternating lines)</li>
+                        <li>✨ Or Forge a flashcard deck from scratch</li>
+                        <li>🏛️ Or select a deck from your library</li>
+                        <li>🧠 Study with Flashcards / Learn / Test modes</li>
+                    </ul>
+                </section>
+
+                <!-- Step 3 -->
+                <section class="onb-step hidden" data-step="3">
+                    <h3>Load or Forge a Study Deck</h3>
+                    <div class="onb-split">
+                        <div class="onb-card">
+                            <h4>🗂️ Upload a .txt file</h4><br>
+                            <p>Each question on one line, its corresponding answer on the next.</p>
+                            <pre class="onb-code">What is the capital of France?<br>Paris<br>What is 2 + 2?<br>4</pre>
+                        </div>
+                        <div class="onb-card">
+                            <h4>✨ Forge a New Set</h4><br>
+                            <p>Click <strong>✨ Forge New Set</strong>,<br>
+                                <strong>➕ Add Cards</strong>,<br>
+                                <strong>💾 Save Set</strong>, then <br>
+                                <strong>🚀 Start Studying</strong>!
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 4 -->
+                <section class="onb-step hidden" data-step="4">
+                    <h3>Pick Your Study Mode</h3>
+                    <div class="onb-mode-grid">
+                        <div class="onb-mode">
+                            <div class="onb-mode-emoji">🃏</div>
+                            <div class="onb-mode-title">Flashcards</div>
+                            <div class="onb-mode-desc">Flip with <kbd>Space</kbd> and <br>navigate with
+                                <kbd>←</kbd>/<kbd>→</kbd>
+                            </div>
+                        </div>
+                        <div class="onb-mode">
+                            <div class="onb-mode-emoji">📚</div>
+                            <div class="onb-mode-title">Learn</div>
+                            <div class="onb-mode-desc">Type answers, get instant feedback, see the correct answer, and
+                                continue</div>
+                        </div>
+                        <div class="onb-mode">
+                            <div class="onb-mode-emoji">📝</div>
+                            <div class="onb-mode-title">Test</div>
+                            <div class="onb-mode-desc">Multiple-choice test with auto-graded results and review of
+                                mistakes</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 5 -->
+                <section class="onb-step hidden" data-step="5">
+                    <h3>Edit or Switch Between Study Sets</h3>
+                    <div class="onb-split">
+                        <div class="onb-card">
+                            <h4>🛠️ Edit Current Study Set</h4><br>
+                            <p>✏️ Modify questions and answers</p>
+                            <p>➕ Add new cards to the flashcard deck</p>
+                            <p>📇 Rearrange the order of the cards by <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; dragging <strong>⠿</strong> or by using the ↑/↓ keys</p>
+                        </div>
+                        <div class="onb-card">
+                            <h4>🏛️ My Library</h4><br>
+                            <p>🔎 See all your flashcard decks and switch <br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; between them</p>
+                            <p>✏️ Rename a flashcard deck</p>
+                            <p>🗑️ Remove a flashcard deck</p>
+                            <p>🗂️ Upload new .txt flashcard deck</p>
+                            <p>✨ Forge new flashcard deck</p>
+                            <p>📊 View your stats</p>
+                            <p>🔄 Reset your stats</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Step 6 -->
+                <section class="onb-step hidden" data-step="6">
+                    <h3>📊 Your Progress</h3>
+                    <div class="onb-card">
+                        <h4>Stats Include:</h4><br>
+                        <p>🃏 Total Number of Flashcards Studied</p>
+                        <p>🎯 Today's Accuracy</p>
+                        <p>📅 Number of Sessions</p>
+                        <p>🔥 Study Streak</p>
+                        <p>📈 Accuracy Graph</p>
+                    </div>
+                </section>
+                
+                <!-- Step 7 -->
+                <section class="onb-step hidden" data-step="7">
+                    <h3>📥 Download This Version</h3>
+                    <div class="onb-card">
+                        <h4>Inside the "🏛️ My Library" section, you can download this version for offline use.</h4>
+                    </div>
+                </section>
+
+                <!-- Step 8 -->
+                <section class="onb-step hidden" data-step="8">
+                    <h3>Access Help Window</h3>
+                    <div class="onb-card">
+                        <h4>To access this Help Window again, click the ❔ in the bottom right.</h4>
+                    </div>
+
+                    <label class="onb-checkbox">
+                        <input type="checkbox" id="onb-dont-show"/>
+                        Don't show this again
+                    </label>
+                </section>
+            </div>
+
+            <div class="onboarding-footer">
+                <div class="onb-steps-indicator">
+                    <span class="onb-dot onb-dot--active" data-dot="1"></span>
+                    <span class="onb-dot" data-dot="2"></span>
+                    <span class="onb-dot" data-dot="3"></span>
+                    <span class="onb-dot" data-dot="4"></span>
+                    <span class="onb-dot" data-dot="5"></span>
+                    <span class="onb-dot" data-dot="6"></span>
+                    <span class="onb-dot" data-dot="7"></span>
+                    <span class="onb-dot" data-dot="8"></span>
+                </div>
+                <div class="onb-actions">
+                    <button id="onb-prev" class="btn btn-secondary" disabled>← Back</button>
+                    <button id="onb-next" class="btn btn-primary">Next →</button>
+                    <button id="onb-done" class="btn btn-success hidden">Let's Go!</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Help button (re-open onboarding anytime) -->
+    <button id="onboarding-help" class="onb-help" aria-label="Help / Onboarding">❔</button>
+
+    <div class="container">
+        <!-- File Upload Section -->
+        <div class="upload-section" id="upload-section">
+            <h2>Welcome to <span class="brand-study"><strong>Study</strong></span> <span
+                    class="brand-forge">Forge</span><span class="brand-js">JS</span>!</h2>
+            <h3>📁 Load Your Flashcard Deck</h3>
+            <p>Upload a .txt file with questions and answers on alternating lines.
+                <br><strong>OR</strong><br>
+                Forge a new study set.
+                <br><strong>OR</strong><br>
+                Select a study set from your library.
+            </p>
+
+            <div class="file-input-wrapper">
+                <input type="file" id="file-input" accept=".txt,.docx" />
+                <label for="file-input" class="file-input-label">📁 Upload File</label>
+                <br />
+                <div class="or-divider">OR</div>
+                <button class="cta-button" id="create-set-btn" onclick="showCreateDeck()">
+                    ✨ Forge New Set
+                </button>
+                <div class="or-divider">OR</div>
+                <button class="btn btn-secondary" id="library-btn" onclick="openDeckLibrary()">🏛️ My Library</button>
+            </div>
+
+            <div class="file-name" id="file-name" style="display:none;">No file selected</div>
+            <div class="format-hint">
+                <strong>File Format Example:</strong><br /><br />
+                <pre style="background:#444444;">What is the capital of France?<br/>Paris<br/>What is 2 + 2?<br/>4</pre>
+                <br />
+                <div style="text-align:center;">
+                    <em>Each question is followed by its answer on the next line.</em><br />
+                </div>
+            </div>
+        </div>
+
+        <div class="deck-library-modal" id="deck-library-modal" style="animation: fadeInUp 0.6s ease-out 0.2s both;">
+            <div class="deck-library-content">
+                <div class="deck-library-header">
+                    <h2>🏛️ My Library</h2>
+                    <button class="close-library" onclick="closeDeckLibrary()">✕</button>
+                </div>
+
+                <!-- Action Buttons -->
+                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="uploadNewDeck()">📁 Upload New Set</button>
+                    <button class="btn cta-button" onclick="createNewDeck()">✨ Forge New Set</button>
+                    <button id="reset-stats-btn" class="btn btn-secondary">🔄 Reset Stats</button>
+                    <button class="btn btn-trinary" style="background: var(--accent-purple)" onclick="downloadOfflineVersion()">💾 Download Offline Version</button>
+                    <div>
+                        <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()">
+                            <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                            <span id="dark-mode-label">🌙 Dark Mode</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Stats Dashboard -->
+                <div class="stats-dashboard" id="stats-dashboard">
+                    <h3 style="color: white; margin-bottom: 10px;">📊 Your Progress</h3>
+                    <div class="stats-grid">
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-total-cards">0</div>
+                            <div class="stat-label">Cards Studied Today</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-accuracy">0%</div>
+                            <div class="stat-label">Today's Accuracy</div>
+                        </div>
+                        <!--
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-sessions">0</div>
+                            <div class="stat-label">Sessions</div>
+                        </div>
+                    -->
+                        <div class="stat-box">
+                            <div class="stat-value" id="stat-streak">
+                                <span class="streak-indicator">
+                                    🔥 <span id="streak-days">0</span> Days
+                                </span>
+                            </div>
+                            <div class="stat-label">Study Streak</div>
+                        </div>
+                    </div>
+                    <div id="accuracy-graph-wrap" style="margin-top: 24px;">
+                        <div style="color: rgba(255,255,255,0.85); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">📈 Accuracy — Current Streak</div>
+                        <canvas id="accuracy-graph" height="120" style="width:100%; border-radius: 10px;"></canvas>
+                        <div id="accuracy-graph-empty" style="display:none; color:rgba(255,255,255,0.5); font-size:13px; text-align:center; padding: 20px 0;">No study data yet — start learning to see your graph!</div>
+                    </div>
+                </div>
+
+                <!-- Deck List -->
+                <div class="deck-list" id="deck-list">
+                    <!-- Decks will be dynamically inserted here -->
+                </div>
+
+                <div class="empty-deck-list" id="empty-deck-list" style="display: none;">
+                    <h3>No saved decks yet</h3>
+                    <p>Upload a file or create a new flashcard deck to get started!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden file input for uploading from library -->
+        <input type="file" id="library-file-input" accept=".txt,.docx" style="display: none;" />
+
+        <!-- Mode Selector Banner -->
+        <div class="mode-selector" id="mode-selector" style="display:none;">
+            <button class="mode-btn active" id="flashcard-mode-btn">🃏 Flashcards</button>
+            <button class="mode-btn" id="learn-mode-btn">📚 Learn</button>
+            <button class="mode-btn" id="test-mode-btn">📝 Test</button>
+            <button class="mode-btn" id="edit-mode-btn" onclick="editCurrentSet()">🛠️ Edit Set</button>
+            <button class="mode-btn" id="library-btn" onclick="openDeckLibrary()">🏛️ My Library</button>
+        </div>
+
+        <div id="editorMode" style="display:none; animation: fadeInUp 0.6s ease-out 0.2s both;">
+
+            <!-- Editor toolbar: place at the top of #editorMode -->
+            <div class="editor-toolbar">
+                <button id="undoBtn" class="btn btn-secondary" title="Undo (Ctrl/Cmd+Z)" disabled>↶ Undo</button>
+                <button id="redoBtn" class="btn btn-secondary" title="Redo (Ctrl/Cmd+Y or Ctrl/Cmd+Shift+Z)" disabled>↷
+                    Redo</button>
+                <span class="editor-hint">Tip: Drag <strong>⠿</strong> to reorder · ↑/↓ on the handle for
+                    keyboard</span>
+            </div>
+            <br>
+
+            <div id="editorCards"></div>
+            <div id="editorButtons" style="display: flex; justify-content: center; gap: 20px;">
+                <button class="btn btn-secondary" onclick="addEmptyEditCard()">➕ Add Card</button>
+                <button class="btn btn-trinary" onclick="saveDeck()" style="background-color:blueviolet;">💾 Save
+                    Set</button>
+                <button class="btn btn-primary" onclick="returnToStudy()">▶️ Return to Studying</button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats" id="stats-section" style="display:none;">
+            <div class="stat-card">
+                <div class="stat-label" style="justify-content: center;">Card</div>
+                <div class="stat-value"><span id="current-index">1</span> / <span id="total-cards">0</span></div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Progress</div>
+                <div class="stat-value" id="progress-percent">0%</div>
+            </div>
+            <div class="stat-card" id="learn-stats" style="display:none;">
+                <div class="stat-label">Correct</div>
+                <div class="stat-value" style="color: white/*#4ecdc4*/;"><span id="learn-correct">0</span></div>
+            </div>
+            <div class="stat-card" id="learn-stats-incorrect" style="display:none;">
+                <div class="stat-label">Incorrect</div>
+                <div class="stat-value" style="color: white/*#e74c3c*/;"><span id="learn-incorrect">0</span></div>
+            </div>
+        </div>
+
+        <!-- FLASHCARD MODE -->
+        <div id="flashcard-mode-container" class="hidden">
+            <!-- Controls -->
+            <div class="controls" id="flashcard-controls">
+                <button class="btn btn-secondary" id="prev-btn">← Previous</button>
+                <button class="btn btn-primary" id="flip-btn">Flip Card</button>
+                <button class="btn btn-secondary" id="next-btn">Next →</button>
+                <button class="btn btn-success" id="shuffle-btn">🔀 Shuffle</button>
+            </div>
+
+            <!-- Create New Flashcard Deck -->
+            <div class="create-deck-card" id="create-deck" style="display:none; text-align:center; margin-top:30px;">
+                <h2>✨ <span class="brand-study">Forge</span> Flashcards</h2>
+                <div class="card-input">
+                    <label>Question</label>
+                    <textarea id="questionInput" placeholder="Type the question here..."
+                        oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'"></textarea>
+                </div>
+                <div class="card-input">
+                    <label>Answer</label>
+                    <textarea id="answerInput" placeholder="Type the answer here..."
+                        oninput="this.style.height=''; this.style.height=this.scrollHeight+'px'"></textarea>
+                </div>
+
+                <button class="btn btn-secondary" onclick="addCard()">➕ Add Card</button>
+                <button class="btn btn-trinary" onclick="saveDeckToFile()" style="background-color:blueviolet;">💾 Save
+                    Set</button>
+                <button class="btn btn-primary" onclick="startDeck()">🚀 Start Studying</button>
+                <br />
+                <button class="btn btn-trinary" onclick="backToFileSelect()" style="background-color: lightslategray;">←
+                    Back to File Selection</button>
+                <p id="cardCount">0 Cards</p>
+                <em style="font-size:14px; opacity:0.7;">Each card will become a flip-style flashcard.</em>
+            </div>
+
+            <!-- Flashcard scene -->
+            <div class="scene" id="card-scene">
+                <div class="card" id="flashcard">
+                    <div class="card__face card__face--front" id="card-front">Load a file to begin</div>
+                    <div class="card__face card__face--back" id="card-back">Answer will appear here</div>
+                    <br>
+                    <span id="confidence-indicator" class="confidence-indicator"></span>
+                </div>
+            </div>
+
+            <!-- Navigation hints -->
+            <div class="nav-hints" id="nav-hints">
+                <div class="hint"><span class="hint-key">←</span><span>Previous Card</span></div>
+                <div class="hint"><span class="hint-key">SPACE</span><span>Flip Card</span></div>
+                <div class="hint"><span class="hint-key">→</span><span>Next Card</span></div>
+            </div>
+
+            <!-- Deck Preview -->
+            <div class="preview-wrapper">
+                <button id="preview-toggle-btn" class="btn preview-toggle" aria-expanded="false"
+                    aria-controls="preview-list" style="background: lightpurple;">
+                    ▲ Show Flashcard Deck
+                </button>
+
+                <div id="preview-list" class="preview-list collapsed" tabindex="-1"></div>
+            </div>
+
+        </div>
+
+        <!-- LEARN MODE -->
+        <div id="learn-mode-container" class="learn-container hidden">
+            <div class="learn-card" id="learn-card">
+                <div class="learn-question" id="learn-question">Question will appear here</div>
+                <div class="learn-input-section" id="learn-input-section">
+                    <input type="text" class="learn-input" id="learn-answer-input"
+                        placeholder="Type your answer here..." autocomplete="off" />
+                    <button class="btn btn-primary" id="learn-submit-btn">Submit Answer</button>
+                </div>
+                <div class="learn-feedback hidden" id="learn-feedback"></div>
+            </div>
+            <div class="controls" id="learn-control-buttons">
+                <button class="btn btn-secondary" id="learn-skip-btn">⏩ Skip Question</button>
+                <button class="btn btn-warning" id="learn-restart-btn">🔄 Restart</button>
+            </div>
+        </div>
+
+        <!-- TEST MODE -->
+        <div id="test-mode-container" class="test-container hidden">
+            <!-- Test Setup -->
+            <div id="test-setup" class="test-setup">
+                <h2>📝 Test Setup</h2>
+                <label for="num-questions">How many questions?</label>
+                <input type="number" id="num-questions" min="1" value="10" />
+                <br />
+                <button class="btn btn-primary" id="start-test-btn">Start Test</button>
+            </div>
+
+            <!-- Test Questions -->
+            <div id="test-container" class="hidden"></div>
+
+            <!-- Submit Button -->
+            <div id="submit-section" class="hidden" style="text-align:center; margin-top:30px;">
+                <button class="btn btn-success" id="submit-test-btn">Submit Test</button>
+            </div>
+
+            <!-- Results -->
+            <div id="results-container" class="results-container hidden"></div>
+        </div>
+    </div>
+
+
+    <script src="assets.js"></script>
+    <script src="app.js"></script>
+
+
+</body>
+
+</html>
