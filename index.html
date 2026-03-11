@@ -3124,6 +3124,11 @@
             // Create empty deck
             const newDeck = DeckManager.createDeck(deckName, []);
 
+            DeckManager.saveDeck(newDeck);
+            DeckManager.setCurrentDeck(newDeck.id);
+
+            renderDeckLibrary();
+
             // Clear current data
             cardsData = [];
             deck = [];
