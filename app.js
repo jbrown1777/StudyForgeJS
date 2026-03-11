@@ -367,6 +367,7 @@ function saveCurrentDeckState() {
 
 // Call this when uploading a file
 function onFileUploaded(fileName, cardsArray) {
+    handleUploadedFile(fileName);
     // Check if this deck already exists by name
     const existingDecks = DeckManager.getAllDecks();
     let existingDeck = existingDecks.find(d => d.name === fileName);
