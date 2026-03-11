@@ -3833,8 +3833,6 @@
                 back: card.answer
             }));
 
-            DeckManager.saveDeck(deck);
-
             // Show study UI
             flashcardModeContainer.classList.remove("hidden");
             modeSelector.style.display = "flex";
@@ -3845,6 +3843,7 @@
 
             // Initialize stats
             currentIndex = 0;
+            parseFlashcards(cardsData);
             showDeck(0);
             updateStats();
             hasUnsavedChanges = false;
