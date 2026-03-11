@@ -3636,6 +3636,8 @@
             });
         }); // End DOMContentLoaded for file input
 
+        let fileNameContent = "";
+
         function parseFlashcards(content) {
             const lines = content
                 .split('\n')
@@ -3671,6 +3673,7 @@
                 const fileNameText = fileName?.textContent || 'Flashcards';
                 promptSaveDeck(fileNameText, cardsData);
                 fileName.textContent = fileNameText;
+                fileNameContent = fileNameText;
                 initializeApp();
             }
         }
