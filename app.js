@@ -1,4 +1,4 @@
-console.log("Version: 2.01");
+console.log("Version: 2.02");
 
 // ============================================================================
 // DATA STORAGE AND MANAGEMENT
@@ -405,7 +405,7 @@ function onFileUploaded(fileName, cardsArray) {
 }
 
 function handleUploadedFile(file) {
-    const extension = file.split('.').pop().toLowerCase();
+    const extension = file.name.split('.').pop().toLowerCase();
 
     if (extension === "txt") {
         readTXT(file);
