@@ -3673,7 +3673,6 @@
                 const fileNameText = fileName?.textContent || 'Flashcards';
                 promptSaveDeck(fileNameText, cardsData);
                 fileName.textContent = fileNameText;
-                fileNameContent = fileNameText;
                 initializeApp();
             }
         }
@@ -3825,19 +3824,21 @@
         function startDeck() {
             if (!deck || deck.length === 0) return alert("Add at least one card first");
 
-            uploadSection.style.display = "none";
-            createDeck.style.display = "none";
-
-            // show study UI
-            statsSection.classList.remove('hidden');
-            flashcardModeContainer.classList.remove("hidden");
-
             // Merge manually created deck into cardsData
             cardsData = deck.map((card, index) => ({
                 id: index,
                 front: card.question,
                 back: card.answer
             }));
+
+            promptSaveDeck(fileNameContent, cardsData);
+
+            uploadSection.style.display = "none";
+            createDeck.style.display = "none";
+
+            // show study UI
+            statsSection.classList.remove('hidden');
+            flashcardModeContainer.classList.remove("hidden");
 
             // Show study UI
             flashcardModeContainer.classList.remove("hidden");
@@ -3858,6 +3859,9 @@
 
             if (previewToggle) previewToggle.classList.remove('hidden');
             if (previewWrapper) previewWrapper.classList.remove('hidden');
+            
+            flashcardModeBtn.click();
+
             initializeApp();
         }
 
