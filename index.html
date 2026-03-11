@@ -2824,8 +2824,7 @@
             const newDeck = DeckManager.createDeckFromCards(fileName, cardsArray);
 
             renderDeckLibrary();
-            uploadSection.style.display = "none";
-            modeSelector.style.display = "block";
+            initializeApp();
             return newDeck;
         }
 
@@ -3652,7 +3651,7 @@
                 // Editor / save representation
                 deck.push({ question, answer });
             }
-            deck.name = DeckManager.getDeck(DeckManager.getCurrentDeckID()).name;
+            deck.name = DeckManager.getDeck(DeckManager.getCurrentDeckID).name;
 
             editorMode = "edit";
             hasUnsavedChanges = false;
