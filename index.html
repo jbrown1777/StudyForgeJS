@@ -2134,7 +2134,7 @@
 
             <div class="file-input-wrapper">
                 <input type="file" id="file-input" accept=".txt" />
-                <label for="file-input" class="file-input-label">📁 Upload File</label>
+                <label for="file-input" class="file-input-label" onclick="uploadNewDeck()">📁 Upload File</label>
                 <br />
                 <div class="or-divider">OR</div>
                 <button class="cta-button" id="create-set-btn" onclick="showCreateDeck()">
@@ -3093,12 +3093,14 @@
 
         // Upload a new deck from the library
         function uploadNewDeck() {
+            if (uploadSection) uploadSection.style.display = "none";
+            if (modeSelector) modeSelector.style.display = "block";
             closeDeckLibrary();
 
             // Trigger the hidden file input
             if (libraryFileInput) {
                 libraryFileInput.click();
-            }
+            }            
         }
 
         // Create a new deck from the library
