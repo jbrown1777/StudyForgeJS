@@ -2824,6 +2824,8 @@
             const newDeck = DeckManager.createDeckFromCards(fileName, cardsArray);
 
             renderDeckLibrary();
+            uploadSection.style.display = "none";
+            modeSelector.style.display = "block";
             return newDeck;
         }
 
@@ -3097,15 +3099,12 @@
 
         // Upload a new deck from the library
         function uploadNewDeck() {
-            if (uploadSection) uploadSection.style.display = "none";
-            if (modeSelector) modeSelector.style.display = "block";
             closeDeckLibrary();
 
             // Trigger the hidden file input
             if (libraryFileInput) {
                 libraryFileInput.click();
             }
-            
         }
 
         // Create a new deck from the library
