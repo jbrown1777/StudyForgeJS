@@ -2582,6 +2582,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!file) { return; }
 
+            handleUploadedFile(file);
+
             currentImportedDeckName = file.name.replace(/\.json$/i, '');
 
             // Update file name display
