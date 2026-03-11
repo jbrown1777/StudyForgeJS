@@ -403,6 +403,62 @@ function onFileUploaded(fileName, cardsArray) {
     return newDeck;
 }
 
+function handleUploadedFile(file) {
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    if (extension === "txt") {
+        readTXT(file);
+    }
+    else if (extension === "docx") {
+        readDOCX(file);
+    }
+    else if (["png", "jpg", "jpeg", "gif", "webp"].includes(extension)) {
+        readImage(file);
+    }
+    else {
+        alert("Unsupported file type.");
+    }
+}
+
+function readTXT(file){
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const text = e.target.result;
+        parseFlashcards(text);
+    };
+
+    reader.readAsText(file);
+}
+
+function readDOCX(file) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        mammoth.convertToHtml({ arrayBuffer: e.target.result }).then(function(result) {
+            const text = result.value.replace(/<[^>]*>/g, "").replace(/\n\s*\n/g, "\n"); // strip html
+
+            parseFlashcards(text);
+        });
+    };
+}
+
+function readImage(file) {
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+        const imageData = e.target.result;
+
+        cardsData = [{
+            id: 0,
+            front: `<img src="${imageData}" style="max-width:100%">`,
+            back: "Describe this image"
+        }];
+    };
+
+    reader.readAsDataURL(file);
+}
+
 // Call this when creating a new deck
 function onCreateDeck(deckName) {
     const newDeck = DeckManager.createDeck(deckName, []);
