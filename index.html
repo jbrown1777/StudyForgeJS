@@ -2073,9 +2073,17 @@
                         <p>📈 Accuracy Graph</p>
                     </div>
                 </section>
-
+                
                 <!-- Step 7 -->
                 <section class="onb-step hidden" data-step="7">
+                    <h3>📥 Download This Version</h3>
+                    <div class="onb-card">
+                        <h4>Inside the "🏛️ My Library" section, you can download this version for offline use.</h4>
+                    </div>
+                </section>
+
+                <!-- Step 8 -->
+                <section class="onb-step hidden" data-step="8">
                     <h3>Access Help Window</h3>
                     <div class="onb-card">
                         <h4>To access this Help Window again, click the ❔ in the bottom right.</h4>
@@ -2097,6 +2105,7 @@
                     <span class="onb-dot" data-dot="5"></span>
                     <span class="onb-dot" data-dot="6"></span>
                     <span class="onb-dot" data-dot="7"></span>
+                    <span class="onb-dot" data-dot="8"></span>
                 </div>
                 <div class="onb-actions">
                     <button id="onb-prev" class="btn btn-secondary" disabled>← Back</button>
@@ -2162,6 +2171,7 @@
                         <div class="toggle-track"><div class="toggle-thumb"></div></div>
                         <span id="dark-mode-label">🌙 Dark Mode</span>
                     </button>
+                    <button class="btn btn-trinary" style="background: var(--accent-purple)" onclick="downloadOfflineVersion()">💾 Download Offline Version</button>
                 </div>
 
                 <!-- Stats Dashboard -->
@@ -3513,7 +3523,7 @@
         const onbDone = document.getElementById('onb-done');
         const onbDontShow = document.getElementById('onb-dont-show');
 
-        const onbStepNum = 7;
+        const onbStepNum = 8;
 
         let onbCurrentStep = 1;
         const onbSteps = Array.from(document.querySelectorAll('.onb-step'));
@@ -4770,6 +4780,13 @@
             );
         }
 
+        // Download version for offline usage
+        function downloadOfflineVersion() {
+            const link = document.createElement("a");
+            link.href = window.location.href;
+            link.download = "StudyForgeJS.html";
+            link.click();
+        }
 
         // ============================================================================
         // EVENT LISTENERS
