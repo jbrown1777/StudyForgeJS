@@ -2462,7 +2462,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("onboarding-logo").src = ASSETS.ICON_128;
-})</script><script>const versionNum = 2.09;
+})
+
+const versionNum = 2.11;
 document.getElementById("versionID").textContent = `V${versionNum}`;
 
 // ============================================================================
@@ -4513,7 +4515,8 @@ function showNextLearnQuestion() {
     } while (learnAskedQuestions.has(question.id));
 
     currentLearnQuestion = question;
-    learnQuestion.textContent = question.front;
+    //learnQuestion.textContent = question.front;
+    learnQuestion.innerHTML = question.front;
     learnAnswerInput.value = '';
     learnAnswerInput.disabled = false;
     learnSubmitBtn.disabled = false;

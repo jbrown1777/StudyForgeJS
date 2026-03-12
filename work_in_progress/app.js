@@ -2049,7 +2049,8 @@ function showNextLearnQuestion() {
     } while (learnAskedQuestions.has(question.id));
 
     currentLearnQuestion = question;
-    learnQuestion.textContent = question.front;
+    //learnQuestion.textContent = question.front;
+    learnQuestion.innerHTML = question.front;
     learnAnswerInput.value = '';
     learnAnswerInput.disabled = false;
     learnSubmitBtn.disabled = false;
