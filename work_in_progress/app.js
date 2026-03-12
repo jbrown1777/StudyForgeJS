@@ -437,11 +437,28 @@ function readDOCX(file) {
     const reader = new FileReader();
 
     reader.onload = function(e) {
-        mammoth.convertToHtml({ arrayBuffer: e.target.result }).then(function(result) {
-            const text = result.value.replace(/<[^>]*>/g, "").replace(/\n\s*\n/g, "\n"); // strip html
+        mammoth.convertToHtml({
+            arrayBuffer: e.target.result,
+            
+            convertImage: mammoth.images.inline(function(element) {
+                return element.read("base64").then(function(imageBuffer) {
+                    return {
+                        src: "data:" + element.contentType + ";base64," + imageBuffer
+                    };
+                });
+            })
+        })
+        
+        .then(function(result) {
+            const text = result.value
+                .replace(/<[^(img)>]*>/g, "\n") // strip HTML
+                .replace(/\n\s*\n/g, "\n");
+
+            console.log(text);    
 
             parseFlashcards(text);
         });
+        
     };
 
     reader.readAsArrayBuffer(file);
@@ -1971,8 +1988,10 @@ function showDeck(index) {
 function showCard(index, card='') {
     if (card === '') {card = cardsData[index];}
     
-    frontElement.textContent = card.front;
-    backElement.textContent = card.back;
+    //frontElement.textContent = card.front;
+    //backElement.textContent = card.back;
+    frontElement.innerHTML = card.front;
+    backElement.innerHTML = card.back;
 }
 
 function updateStats() {
