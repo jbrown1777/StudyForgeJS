@@ -1,5 +1,4 @@
-//console.log("Version: 2.03");
-const versionNum = 2.07;
+const versionNum = 2.08;
 document.getElementById("versionID").textContent = `V${versionNum}`;
 
 // ============================================================================
