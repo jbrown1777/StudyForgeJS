@@ -2469,6 +2469,7 @@ function getTodayAccuracy() {
 // Download version for offline usage — inlines all CSS and JS into a single HTML file
 async function downloadOfflineVersion() {
     try {
+        closeDeckLibrary();
         // Fetch all external resources
         const [cssText, assetsText, appText] = await Promise.all([
             fetch('styles.css').then(r => r.text()),
