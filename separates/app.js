@@ -1,5 +1,5 @@
 //console.log("Version: 2.03");
-const versionNum = 2.06;
+const versionNum = 2.07;
 document.getElementById("versionID").textContent = `V${versionNum}`;
 
 // ============================================================================
@@ -1260,8 +1260,8 @@ document.addEventListener('DOMContentLoaded', function () {
             fileNameContent = file.name;
             fileName.textContent = file.name;
             fileName.style.display = 'block';
-            handleUploadedFile(file);
-            /*
+            //handleUploadedFile(file);
+            
             const reader = new FileReader();
             reader.onload = function (event) {
                 const content = event.target.result;
@@ -1271,7 +1271,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Error reading file. Please try again.');
             };
             reader.readAsText(file);
-            */
+            
         }
     });
 }); // End DOMContentLoaded for file input
