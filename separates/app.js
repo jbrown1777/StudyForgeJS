@@ -1,6 +1,6 @@
 //console.log("Version: 2.03");
 const versionNum = 2.05;
-document.getElementById("versionID").textContent = versionNum;
+document.getElementById("versionID").textContent = `V${versionNum}`;
 
 // ============================================================================
 // DATA STORAGE AND MANAGEMENT
