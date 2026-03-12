@@ -2385,7 +2385,7 @@
     </div>
 
     <script>
-        console.log("Version: 2.04");
+        console.log("Version: 1.46");
         // ============================================================================
         // URL SETUP (SEPARATED FROM REST OF FILE INTENTIONALLY)
         // ============================================================================
@@ -3099,6 +3099,17 @@
                     editModeBtn.click();
                 }
             }
+
+            if (DeckManager.getAllDecks().length === 0) {
+                uploadSection.style.display = "block";
+            }
+
+            if (uploadSection.style.display !== "none") {
+                statsSection.style.display = "none";
+                hideFlashcardMode();
+                testContainer.style.display = "none";
+            }
+            
         }
 
         // Upload a new deck from the library
