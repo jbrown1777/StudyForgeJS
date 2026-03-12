@@ -1,4 +1,4 @@
-const versionNum = 2.08;
+const versionNum = 2.09;
 document.getElementById("versionID").textContent = `V${versionNum}`;
 
 // ============================================================================
@@ -2615,6 +2615,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 fileName.style.display = 'block';
             }
 
+            /*
             const reader = new FileReader();
             reader.onload = function (event) {
                 const content = event.target.result;
@@ -2627,7 +2628,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Error reading file. Please try again.');
             };
             reader.readAsText(file);
-
+            */
         });
     }
 
