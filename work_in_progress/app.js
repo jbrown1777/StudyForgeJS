@@ -369,7 +369,6 @@ function saveCurrentDeckState() {
 
 // Call this when uploading a file
 function onFileUploaded(fileName, cardsArray) {
-    handleUploadedFile(fileName);
     // Check if this deck already exists by name
     const existingDecks = DeckManager.getAllDecks();
     let existingDeck = existingDecks.find(d => d.name === fileName);
@@ -1260,7 +1259,7 @@ document.addEventListener('DOMContentLoaded', function () {
             fileNameContent = file.name;
             fileName.textContent = file.name;
             fileName.style.display = 'block';
-            //handleUploadedFile(file);
+            handleUploadedFile(file);
             
             const reader = new FileReader();
             reader.onload = function (event) {
