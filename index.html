@@ -2385,7 +2385,7 @@
     </div>
 
     <script>
-        console.log("Version: 1.46");
+        console.log("Version: 1.47");
         // ============================================================================
         // URL SETUP (SEPARATED FROM REST OF FILE INTENTIONALLY)
         // ============================================================================
@@ -3109,6 +3109,8 @@
                 hideFlashcardMode();
                 testContainer.style.display = "none";
                 modeSelector.style.display = "none";
+                fileName.textContent = "No file selected";
+                fileNameContent = fileName.textContent;
             }
             
         }
