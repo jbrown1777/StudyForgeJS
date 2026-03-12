@@ -2385,7 +2385,7 @@
     </div>
 
     <script>
-        console.log("Version: 1.47");
+        console.log("Version: 1.48");
         // ============================================================================
         // URL SETUP (SEPARATED FROM REST OF FILE INTENTIONALLY)
         // ============================================================================
@@ -2719,8 +2719,6 @@
                     //const todayMidnight = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate());
 
                     const diffDays = Math.floor((today/*Midnight*/ - last/*Midnight*/) / (1000 * 60 * 60 * 24));
-                    console.log(diffDays);
-                    console.log(stats.streakDays);
 
                     if (diffDays === 1) {
                         stats.streakDays += 1;
@@ -3169,7 +3167,6 @@
                 emptyMessage.style.display = 'block';
                 return;
             }
-            console.log(decks);
 
             emptyMessage.style.display = 'none';
 
