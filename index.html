@@ -2464,7 +2464,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("onboarding-logo").src = ASSETS.ICON_128;
 })
 
-const versionNum = 2.11;
+const versionNum = 2.13;
 document.getElementById("versionID").textContent = `V${versionNum}`;
 
 // ============================================================================
@@ -2698,24 +2698,6 @@ const ProgressTracker = {
             lastStudyDate: null,
             studyHistory: [] // Array of {date, cardsStudied, correct, incorrect}
         });
-
-        //const today = getTodayDateString();
-
-        // Check if today already exists
-        //let todayEntry = stats.studyHistory.find(d => d.date === today);
-
-        /*
-        if (!todayEntry) {
-            todayEntry = {
-                date: today,
-                cardsStudied: 0,
-                correct: 0,
-                incorrect: 0
-            };
-            stats.studyHistory.push(todayEntry);
-            Storage.save(STORAGE_KEYS.STATS, stats);
-        }
-        */
 
         return stats;
     },
