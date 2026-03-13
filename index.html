@@ -2699,11 +2699,12 @@ const ProgressTracker = {
             studyHistory: [] // Array of {date, cardsStudied, correct, incorrect}
         });
 
-        const today = getTodayDateString();
+        //const today = getTodayDateString();
 
         // Check if today already exists
-        let todayEntry = stats.studyHistory.find(d => d.date === today);
+        //let todayEntry = stats.studyHistory.find(d => d.date === today);
 
+        /*
         if (!todayEntry) {
             todayEntry = {
                 date: today,
@@ -2714,6 +2715,7 @@ const ProgressTracker = {
             stats.studyHistory.push(todayEntry);
             Storage.save(STORAGE_KEYS.STATS, stats);
         }
+        */
 
         return stats;
     },
@@ -2744,29 +2746,6 @@ const ProgressTracker = {
         stats.totalCorrect += correct;
         stats.totalIncorrect += incorrect;
 
-        // Update streak
-        if (!stats.lastStudyDate) {
-            stats.streakDays = 1;
-        }
-        else {
-            const lastDate = new Date(stats.lastStudyDate);
-            const todayDate = new Date(today);
-
-            //const lastMidnight = new Date(lastDate.getFullYear(), lastDate.getMonth(), lastDate.getDate());
-            //const todayMidnight = new Date(todayDate.getFullYear(), todayDate.getMonth(), todayDate.getDate());
-
-            const diffDays = Math.floor((today/*Midnight*/ - last/*Midnight*/) / (1000 * 60 * 60 * 24));
-            console.log(diffDays);
-            console.log(stats.streakDays);
-
-            if (diffDays === 1) {
-                stats.streakDays += 1;
-            } else if (diffDays > 1) {
-                stats.streakDays = 1; // Streak broken
-            }
-            // If diffDays === 0, same day, don't change streak
-        }
-
         stats.lastStudyDate = today;
 
         // Add to history
@@ -2789,6 +2768,8 @@ const ProgressTracker = {
             stats.studyHistory = stats.studyHistory.slice(-90);
         }
 
+        stats.streakDays = calculateStreak(stats.studyHistory);
+
         Storage.save(STORAGE_KEYS.STATS, stats);
     }
 };
@@ -2803,6 +2784,28 @@ function scheduleAutoSave() {
     autoSaveTimeout = setTimeout(() => {
         saveCurrentDeckState();
     }, 2000); // Auto-save 2 seconds after last change
+}
+
+function calculateStreak(history) {
+    const today = getTodayDateString();
+    let streak = 0;
+
+    const dates = history.map(h => h.date).sort((a, b) => new Date(b) - new Date(a));
+
+    let checkDate = new Date(today);
+
+    for (let date of dates) {
+        const expected = checkDate.toISOString().split('T')[0];
+
+        if (date === expected) {
+            streak++;
+            checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+            break;
+        }
+    }
+
+    return streak;
 }
 
 function saveCurrentDeckState() {
