@@ -1825,11 +1825,51 @@
             margin: 0 auto;
         }
 
+        /* Settings */
+        .settings-container {
+            margin-left: auto;
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        .settings-menu {
+            position: absolute;
+            top: 110%;
+            right: 0;
+            gap: 20px;
+            background: var(--dark-gray);
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: none;
+            flex-direction: column;
+            min-width: 180px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: 0.15s ease;
+        }
+
+        .settings-menu button {
+            padding: 10px;
+            border: none;
+            /* background: none; */
+            text-align: left;
+            cursor: pointer;
+        }
+
+        .settings-menu.open {
+            display: flex;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         /* DARK MODE */
         .dark-mode-toggle {
             display: flex;
             align-items: center;
-            gap: 10px;
+            /* gap: 10px; */
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             border-radius: 20px;
@@ -1954,6 +1994,20 @@
         <div class="brand-name">
             <span class="brand-study">STUDY</span><span class="brand-forge">FORGE</span><span class="brand-js">JS</span>
             <p id="versionID" style="color: white; font-size: 16px;"></p>
+        </div>
+        <div class="settings-container">
+            <button id="settings-btn" class="btn">⚙ Settings</button>
+
+            <div id="settings-menu" class="settings-menu">
+                <button id="reset-stats-btn" class="btn btn-secondary" style="top: 10px">🔄 Reset Stats</button>
+                <button class="btn btn-trinary" style="background: var(--accent-purple)" onclick="downloadOfflineVersion()">💾 Download Offline Version</button>
+                <div>
+                    <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()">
+                        <div class="toggle-track"><div class="toggle-thumb"></div></div>
+                        <span id="dark-mode-label">🌙 Dark Mode</span>
+                    </button>
+                </div>
+            </div>
         </div>
         <img src="studyforgejs-icons/icon_128.png" class="logo" alt="studyforgejs" width="70" height="70" />
     </div>
@@ -2173,14 +2227,6 @@
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap;">
                     <button class="btn btn-primary" onclick="uploadNewDeck()">📁 Upload New Set</button>
                     <button class="btn cta-button" onclick="createNewDeck()">✨ Forge New Set</button>
-                    <button id="reset-stats-btn" class="btn btn-secondary">🔄 Reset Stats</button>
-                    <button class="btn btn-trinary" style="background: var(--accent-purple)" onclick="downloadOfflineVersion()">💾 Download Offline Version</button>
-                    <div>
-                        <button class="dark-mode-toggle" id="dark-mode-toggle" onclick="toggleDarkMode()">
-                            <div class="toggle-track"><div class="toggle-thumb"></div></div>
-                            <span id="dark-mode-label">🌙 Dark Mode</span>
-                        </button>
-                    </div>
                 </div>
 
                 <!-- Stats Dashboard -->
@@ -2433,7 +2479,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.15;
+        const versionNum = 2.16;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -2996,6 +3042,10 @@
         // Library elements
         const libraryFileInput = document.getElementById('library-file-input');
         const libraryModal = document.getElementById('deck-library-modal');
+
+        // Settings elements
+        const settingsBtn = document.getElementById("settings-btn");
+        const settingsMenu = document.getElementById("settings-menu");
 
         // Create deck elements
         const createDeck = document.getElementById('create-deck');
@@ -4982,6 +5032,17 @@
 
         }); // End DOMContentLoaded for event listeners
 
+        document.addEventListener("click", function (e) {
+            if (!settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
+                settingsMenu.classList.remove("open");
+            }
+        });
+
+        settingsBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            settingsMenu.classList.toggle("open");
+        });
+
         function togglePreview() {
             if (!previewToggle || !previewList) {
                 console.warn("Preview elements not found");
@@ -5004,9 +5065,9 @@
             }
         }
 
-        // 
+        // ============================================================================
         // DARK MODE
-        // 
+        // ============================================================================
         const DARK_KEY = 'studyforgejs_dark_mode';
 
         function applyDarkMode(enabled) {
