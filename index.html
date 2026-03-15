@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.20;
+        const versionNum = 2.21;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4344,6 +4344,7 @@
                 // Learn stats cards hidden in flashcards
                 document.getElementById('learn-stats').style.display = 'none';
                 document.getElementById('learn-stats-incorrect').style.display = 'none';
+                currentIndex = 0;
 
                 // Ensure a card is visible
                 if (cardsData.length) { showDeck(currentIndex || 0); }
