@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.23;
+        const versionNum = 2.24;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4355,27 +4355,29 @@
         }
 
         function switchToLearnMode() {
-            leaveEditorIfOpen(() => {
-                currentMode = 'learn';
+            const prevMode = currentMode;
+            currentMode = "learn";
+            if (prevMode !== currentMode) {
+                leaveEditorIfOpen(() => {
+                    // Activate only the visible mode button
+                    deactivateAllModeButtons();
+                    learnModeBtn.classList.add('active');
 
-                // Activate only the visible mode button
-                deactivateAllModeButtons();
-                learnModeBtn.classList.add('active');
+                    learnModeContainer.classList.remove('hidden');
+                    flashcardModeContainer.classList.add('hidden');
+                    testModeContainer.classList.add('hidden');
 
-                learnModeContainer.classList.remove('hidden');
-                flashcardModeContainer.classList.add('hidden');
-                testModeContainer.classList.add('hidden');
+                    statsSection.classList.remove('hidden');
+                    learnStats.style.display = 'block';
+                    learnStatsIncorrectCard.style.display = 'block';
 
-                statsSection.classList.remove('hidden');
-                learnStats.style.display = 'block';
+                    startLearnMode();
+                });
+
+                hideFlashcardMode();
+                statsSection.style.display = 'flex';
                 learnStatsIncorrectCard.style.display = 'block';
-
-                startLearnMode();
-            });
-
-            hideFlashcardMode();
-            statsSection.style.display = 'flex';
-            learnStatsIncorrectCard.style.display = 'block';
+            }
         }
 
         function switchToTestMode() {
