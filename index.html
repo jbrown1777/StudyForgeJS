@@ -2479,7 +2479,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.16;
+        const versionNum = 2.17;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -3105,13 +3105,14 @@
 
         // Open the deck library modal
         function openDeckLibrary() {
-            deactivateAllModeButtons();
+            //deactivateAllModeButtons();
 
-            libraryBtn.classList.add("active");
+            //libraryBtn.classList.add("active");
 
             libraryModal.classList.add('show');
             libraryModal.scrollTop = 0;
 
+            /*
             lastMode = currentMode;
 
             testModeBtn.click();
@@ -3123,6 +3124,7 @@
             testContainer.classList.add('hidden');
             testModeBtn.classList.remove("active");
             libraryBtn.classList.add("active");
+            */
 
             renderDeckLibrary();
             updateStatsDashboard();
@@ -3132,6 +3134,7 @@
         function closeDeckLibrary() {
             libraryModal.classList.remove('show');
 
+            /*
             if (currentMode != 'createNewDeck') {
                 if (lastMode === 'flashcard') {
                     flashcardModeBtn.click();
@@ -3143,6 +3146,7 @@
                     editModeBtn.click();
                 }
             }
+            */
         }
 
         // Upload a new deck from the library
