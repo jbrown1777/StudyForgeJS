@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.24;
+        const versionNum = 2.25;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4381,34 +4381,39 @@
         }
 
         function switchToTestMode() {
-            leaveEditorIfOpen(() => {
-                currentMode = 'test';
+            const prevMode = currentMode;
+            currentMode = "test";
+            
+            if (prevMode !== currentMode) {
+                leaveEditorIfOpen(() => {
+                    currentMode = 'test';
 
-                // Activate only the visible mode button
-                deactivateAllModeButtons();
+                    // Activate only the visible mode button
+                    deactivateAllModeButtons();
 
-                testModeBtn.classList.add('active');
-                testModeContainer.classList.remove('hidden');
-                testModeContainer.style.display = 'block';
+                    testModeBtn.classList.add('active');
+                    testModeContainer.classList.remove('hidden');
+                    testModeContainer.style.display = 'block';
 
-                flashcardModeContainer.classList.add('hidden');
-                learnModeContainer.classList.add('hidden');
+                    flashcardModeContainer.classList.add('hidden');
+                    learnModeContainer.classList.add('hidden');
 
-                statsSection.classList.add('hidden');
+                    statsSection.classList.add('hidden');
 
-                // Reset test state
-                testSetup.classList.remove('hidden');
-                submitSection.classList.add('hidden');
-                resultsContainer.classList.add('hidden');
-                testContainer.classList.add('hidden');
-                testContainer.innerHTML = '';
-                userAnswers = {};
-            });
-            // Set default number of test questions
-            numQuestionsInput.value = deck.length;
-            numQuestionsInput.max = deck.length;
+                    // Reset test state
+                    testSetup.classList.remove('hidden');
+                    submitSection.classList.add('hidden');
+                    resultsContainer.classList.add('hidden');
+                    testContainer.classList.add('hidden');
+                    testContainer.innerHTML = '';
+                    userAnswers = {};
+                });
+                // Set default number of test questions
+                numQuestionsInput.value = deck.length;
+                numQuestionsInput.max = deck.length;
 
-            hideFlashcardMode();
+                hideFlashcardMode();
+            }
         }
 
         function deactivateAllModeButtons() {
