@@ -2479,7 +2479,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.17;
+        const versionNum = 2.18;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -2881,6 +2881,7 @@
 
         // Call this after Learn mode session
         function onLearnSessionComplete(correct, incorrect) {
+            currentIndexElement.textContent = document.getElementById("total-cards").textContent;
             const currentDeckId = DeckManager.getCurrentDeckId();
             if (!currentDeckId) return;
 
@@ -4854,7 +4855,7 @@
             const stats = ProgressTracker.getGlobalStats();
             const today = getTodayDateString();
 
-            const todayEntry = stats.studyHistory.find(d => d.date === today);
+            let todayEntry = stats.studyHistory.find(d => d.date === today);
 
             if (!todayEntry) {
                 todayEntry = {
@@ -4863,6 +4864,7 @@
                     correct: 0,
                     incorrect: 0
                 };
+                stats.studyHistory.push(todayEntry);
             }
 
             todayEntry.cardsStudied++;
