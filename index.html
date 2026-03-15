@@ -1966,6 +1966,11 @@
 
         body.dark .option:hover { background: rgba(255,255,255,0.14); }
 
+        body.dark .option.selected {
+            background: linear-gradient(135deg, var(--primary-blue), #0a4fd6);
+            border-color: white;
+        }
+
         body.dark .editor-toolbar { background: #1e1e2e; border-bottom-color: #333; }
         body.dark .editor-card { background: #333342; }
         body.dark .editor-question, body.dark .editor-answer { background: #1a1a2a; color: #e0e0f0; border-color: #444; }
@@ -2482,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.19;
+        const versionNum = 2.20;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
