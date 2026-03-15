@@ -2040,13 +2040,13 @@
                 </section>
 
                 <!-- Step 2 -->
-                <section class="onb-step" data-step="2">
+                <section class="onb-step hidden" data-step="2">
                     <h3>How to use <span class="brand-study">Study</span><span class="brand-forge">Forge</span><span
                             class="brand-js">JS</span></h3>
                     <p>Create or upload flashcards, <strong>learn</strong> by typing answers, and <strong>test</strong>
                         yourself with auto-graded quizzes.</p>
                     <ul class="onb-bullets">
-                        <li>🗂️ Upload a .txt flashcard deck (Q/A on alternating lines)</li>
+                        <li>🗂️ Upload a .txt or .docx flashcard deck (Q/A on alternating lines)</li>
                         <li>✨ Or Forge a flashcard deck from scratch</li>
                         <li>🏛️ Or select a deck from your library</li>
                         <li>🧠 Study with Flashcards / Learn / Test modes</li>
@@ -2058,8 +2058,9 @@
                     <h3>Load or Forge a Study Deck</h3>
                     <div class="onb-split">
                         <div class="onb-card">
-                            <h4>🗂️ Upload a .txt file</h4><br>
-                            <p>Each question on one line, its corresponding answer on the next.</p>
+                            <h4>🗂️ Upload a .txt or .docx file</h4><br>
+                            <p>Each question on one line, its corresponding answer on the next</p>
+                            <p>Images can only be uploaded through a .docx file</p>
                             <pre class="onb-code">What is the capital of France?<br>Paris<br>What is 2 + 2?<br>4</pre>
                         </div>
                         <div class="onb-card">
@@ -2117,7 +2118,6 @@
                             <p>🗂️ Upload new .txt flashcard deck</p>
                             <p>✨ Forge new flashcard deck</p>
                             <p>📊 View your stats</p>
-                            <p>🔄 Reset your stats</p>
                         </div>
                     </div>
                 </section>
@@ -2137,9 +2137,12 @@
                 
                 <!-- Step 7 -->
                 <section class="onb-step hidden" data-step="7">
-                    <h3>📥 Download This Version</h3>
+                    <h3>⚙︎ Settings</h3>
                     <div class="onb-card">
-                        <h4>Inside the "🏛️ My Library" section, you can download this version for offline use.</h4>
+                        <h4>The Settings section in the top right has a few options</h4><br>
+                        <p>🔄 Reset your stats</p>
+                        <p>📥 Download Latest Version of StudyForgeJS</p>
+                        <p>🔆/🌙 Toggle between Light/Dark mode</p>
                     </div>
                 </section>
 
@@ -2479,7 +2482,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.18;
+        const versionNum = 2.19;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
