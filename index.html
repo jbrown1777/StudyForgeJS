@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.28;
+        const versionNum = 2.29;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4725,7 +4725,7 @@
             // NORMAL MULTIPLE CHOICE LOGIC
 
             // Remove duplicate answers
-            const allAnswers = [...new Set(deck.map(c => c.answer))];
+            const allAnswers = [...new Set(deck.map(c => c.answer.trim()))];
 
             // Remove correct answer
             let pool = allAnswers.filter(a => a !== correctAnswer);
