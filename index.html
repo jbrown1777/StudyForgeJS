@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.27;
+        const versionNum = 2.28;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4683,6 +4683,8 @@
 
             testData = selected.map((card, idx) => {
                 const correctAnswer = card.back;
+
+                /*
                 const otherAnswers = cardsData
                     .filter(c => c.id !== card.id && c.back !== correctAnswer)
                     .map(c => c.back);
@@ -4697,6 +4699,9 @@
 
                 // Combine and shuffle options
                 const options = [correctAnswer, ...wrongAnswers].sort(() => Math.random() - 0.5);
+                */
+
+                const options = generateSmartOptions(correctAnswer);
 
                 return {
                     id: idx,
@@ -4707,6 +4712,57 @@
             });
 
             displayTest();
+        }
+
+        function generateSmartOptions(correctAnswer) {
+            // TRUE/FALSE MULTIPLE CHOICE LOGIC
+            const normalized = correctAnswer.trim().toLowerCase();
+
+            if (normalized === "true" || normalized === "false") {
+                return ["True", "False"]; // True/False is all that is needed
+            }
+
+            // NORMAL MULTIPLE CHOICE LOGIC
+
+            // Remove duplicate answers
+            const allAnswers = [...new Set(deck.map(c => c.answer))];
+
+            // Remove correct answer
+            let pool = allAnswers.filter(a => a !== correctAnswer);
+
+            const correctWords = correctAnswer.trim().split(/\s+/).length;
+
+            // Prefer answers with similar word count
+            pool.sort((a,b) => {
+                const wordsA = a.trim().split(/\s/).length;
+                const wordsB = b.trim().split(/\s/).length;
+
+                const diffA = Math.abs(wordsA - correctWords);
+                const diffB = Math.abs(wordsB - correctWords);
+                return diffA - diffB;
+            })
+
+            // Take top candidates
+            const candidates = pool.slice(0, 8);
+
+            // Pick 3 random wrong answers
+            const distractorCount = Math.min(3, candidates.length);
+            const distractors = [];
+            
+            for (let i = 0; i < distractorCount; i++) {
+                const index = Math.floor(Math.random() * candidates.length);
+                distractors.push(candidates.splice(index, 1)[0]);
+            }
+
+            // Combine and shuffle
+            const options = [correctAnswer, ...distractors];
+            
+            for (let i = options.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [options[i], options[j]] = [options[j], options[i]];
+            }
+
+            return options;
         }
 
         function displayTest() {
