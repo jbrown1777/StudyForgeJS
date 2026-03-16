@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.26;
+        const versionNum = 2.27;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4884,6 +4884,10 @@
                     incorrect: 0
                 };
                 stats.studyHistory.push(todayEntry);
+                // Keep only last 90 days of history
+                if (stats.studyHistory.length > 90) {
+                    stats.studyHistory = stats.studyHistory.slice(-90);
+                }
             }
 
             todayEntry.cardsStudied++;
@@ -4915,6 +4919,10 @@
                     incorrect: 0
                 };
                 stats.studyHistory.push(todayEntry);
+                // Keep only last 90 days of history
+                if (stats.studyHistory.length > 90) {
+                    stats.studyHistory = stats.studyHistory.slice(-90);
+                }
             }
     
             todayEntry.correct++;
