@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.29;
+        const versionNum = 2.30;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4740,7 +4740,7 @@
                 const diffA = Math.abs(wordsA - correctWords);
                 const diffB = Math.abs(wordsB - correctWords);
                 return diffA - diffB;
-            })
+            });
 
             // Take top candidates
             const candidates = pool.slice(0, 8);
