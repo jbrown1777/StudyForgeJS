@@ -2487,7 +2487,7 @@
 
     <script>
         // Version Tracker
-        const versionNum = 2.30;
+        const versionNum = 2.31;
         console.log("Version: " + versionNum);
         document.getElementById("versionID").textContent = versionNum;
 
@@ -4730,8 +4730,9 @@
             // Remove correct answer
             let pool = allAnswers.filter(a => a !== correctAnswer);
 
-            const correctWords = correctAnswer.trim().split(/\s+/).length;
+            const numWordsFoundInCorrect = wordCount(correctAnswer);
 
+            /*
             // Prefer answers with similar word count
             pool.sort((a,b) => {
                 const wordsA = a.trim().split(/\s/).length;
@@ -4741,9 +4742,24 @@
                 const diffB = Math.abs(wordsB - correctWords);
                 return diffA - diffB;
             });
+            */
+            
+            const scoredPool = pool.map(a => ({
+                text: a,
+                keyword: keywordScore(correctAnswer, a),
+                wordDiff: Math.abs(wordCount(a) - numWordsFoundInCorrect)
+            }));
+
+            scoredPool.sort((a, b) => {
+                if (a.keyword !== b.keyword) return b.keyword - a.keyword;
+                return a.wordDiff - b.wordDiff;
+            })
+
+            const sortedPool = scoredPool.map(x => x.text);
+            const candidates = sortedPool.slice(0, 8);
 
             // Take top candidates
-            const candidates = pool.slice(0, 8);
+            //const candidates = pool.slice(0, 8);
 
             // Pick 3 random wrong answers
             const distractorCount = Math.min(3, candidates.length);
